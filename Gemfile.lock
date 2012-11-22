@@ -4,9 +4,11 @@ GEM
     commander (4.1.2)
       highline (~> 1.6.11)
     highline (1.6.15)
+    nokogiri (1.5.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   commander
+  nokogiri
