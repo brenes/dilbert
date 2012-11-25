@@ -2,8 +2,7 @@
 
 require 'rubygems'
 require 'commander/import'
-require 'nokogiri'
-require 'open-uri'
+require_relative '../lib/dilbert'
 
 program :version, "1"
 program :description, 'Fetch Dilbert strips and just enjoy'
@@ -20,14 +19,9 @@ command :fetch do |c|
   c.action do |args, options|
 
     date = Date.parse(args.first) rescue Date.today
-    strip_url = "http://www.dilbert.com/strips/comic/#{date}"
-    puts "Looking at #{strip_url}"
+    strip_file = Dilbert.fetch(date)
+    system "eog #{strip_file} &"
 
-    strip = Nokogiri::HTML(open(strip_url))
-    strip_img = strip.css('.STR_Image img').first
-    strip_img_url = "http://www.dilbert.com/#{strip_img.attr('src')}"
-
-    puts "Hoorray!! The strip is at #{strip_img_url}"
   end
 end
 
